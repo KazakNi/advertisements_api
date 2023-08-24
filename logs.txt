@@ -29,3 +29,19 @@
 2023/08/23 16:15:18 Hello world!
 2023/08/23 16:38:19 sql: unknown driver "" (forgotten import?)
 2023/08/23 16:39:50 sql: unknown driver "" (forgotten import?)
+2023/08/24 14:57:06 Query transaction begins
+2023/08/24 14:57:06 Query transaction ends
+2023/08/24 15:59:15 invalid http parameter: 'page'=0
+, error:strconv.Atoi: parsing "": invalid syntax
+2023/08/24 16:24:39 pq: relation "main_table" does not exist
+2023/08/24 19:28:40 error while querying: pq: syntax error at or near ")"
+2023/08/24 19:29:06 error while querying: pq: syntax error at end of input
+2023/08/24 20:08:27 error while querying: sql: Scan error on column index 2, name "photos": pq: unable to parse array; expected '{' at offset 0
+2023/08/24 20:11:19 Query transaction begins
+2023/08/24 20:11:19 Query transaction ends
+2023/08/24 20:13:40 Query transaction begins
+2023/08/24 20:13:40 Query transaction ends
+2023/08/24 20:13:55 Query transaction begins
+2023/08/24 20:13:55 Query transaction ends
+2023/08/24 20:14:23 Query transaction begins
+2023/08/24 20:14:23 Query transaction ends

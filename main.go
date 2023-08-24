@@ -2,12 +2,20 @@ package main
 
 import (
 	"adv/api"
+	database "adv/db"
 	"log"
 	"os"
 )
 
+const dev = false // false while production mode
+
 func main() {
 	logger()
+
+	if dev == true {
+		database.CreateDB(database.DB)
+		database.ExecuteQueries(database.DB)
+	}
 	router := api.GetRoutes()
 	router.Run(":8080")
 }

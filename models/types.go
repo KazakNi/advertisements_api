@@ -1,7 +1,9 @@
-package types
+package models
 
 import (
 	"time"
+
+	"github.com/lib/pq"
 )
 
 type User struct {
@@ -28,11 +30,22 @@ func (user *User) CheckPassword(providedPassword string) error {
 */
 
 type Advertisement struct {
-	Name        string    `json:"name"`
-	Description string    `json:"description,omitempty"`
-	Price       int       `json:"price"`
-	Created_at  time.Time `json:"created_at,omitempty"`
-	Photos      []string  `json:"photos"`
+	Name        string         `json:"name"  db:"name"`
+	Description string         `json:"description,omitempty"  db:"description"`
+	Price       int            `json:"price"  db:"price"`
+	Created_at  time.Time      `json:"created_at,omitempty"  db:"created_at"`
+	Photos      pq.StringArray `json:"photos" db:"photos"`
+}
+
+type AllAdvertisements struct {
+	Name   string `json:"name"  db:"name"`
+	Price  int    `json:"price"  db:"price"`
+	Photos string `json:"photos" db:"photos"`
+}
+
+type ResponseAllAdvertisements struct {
+	AllAdvertisements []AllAdvertisements `json:"items"`
+	NextPage          int                 `json:"next_page"`
 }
 
 // func (a *Advertisement) ShowOptionalParams(visible bool) *Advertisement
