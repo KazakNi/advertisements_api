@@ -8,6 +8,8 @@ require (
 	github.com/lib/pq v1.2.0
 )
 
+require gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
+
 require (
 	github.com/bytedance/sonic v1.10.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect

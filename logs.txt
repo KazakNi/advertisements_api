@@ -45,3 +45,6 @@
 2023/08/24 20:13:55 Query transaction ends
 2023/08/24 20:14:23 Query transaction begins
 2023/08/24 20:14:23 Query transaction ends
+2023/08/25 11:02:36 error while querying: sql: Scan error on column index 2, name "photos": pq: unable to parse array; expected '{' at offset 0
+2023/08/25 17:54:22 error while querying: sql: Scan error on column index 2, name "photos": pq: unable to parse array; expected '{' at offset 0
+2023/08/25 17:56:50 error while querying: pq: syntax error at or near "ORDER"

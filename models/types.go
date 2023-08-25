@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/lib/pq"
+	_ "gopkg.in/go-playground/validator.v9"
 )
 
 type User struct {
@@ -30,11 +30,11 @@ func (user *User) CheckPassword(providedPassword string) error {
 */
 
 type Advertisement struct {
-	Name        string         `json:"name"  db:"name"`
-	Description string         `json:"description,omitempty"  db:"description"`
-	Price       int            `json:"price"  db:"price"`
-	Created_at  time.Time      `json:"created_at,omitempty"  db:"created_at"`
-	Photos      pq.StringArray `json:"photos" db:"photos"`
+	Name        string     `json:"name"  db:"name"`
+	Description string     `json:"description,omitempty"  db:"description"`
+	Price       int        `json:"price"  db:"price"`
+	Photos      string     `json:"photos" db:"photos"`
+	Created_at  *time.Time `json:"created_at,omitempty"  db:"created_at"`
 }
 
 type AllAdvertisements struct {
@@ -44,8 +44,8 @@ type AllAdvertisements struct {
 }
 
 type ResponseAllAdvertisements struct {
-	AllAdvertisements []AllAdvertisements `json:"items"`
-	NextPage          int                 `json:"next_page"`
+	AllAdvertisements []Advertisement `json:"items"`
+	NextPage          int             `json:"next_page"`
 }
 
 // func (a *Advertisement) ShowOptionalParams(visible bool) *Advertisement

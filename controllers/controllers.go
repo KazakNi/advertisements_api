@@ -10,7 +10,7 @@ import (
 )
 
 func getParams(c *gin.Context) (string, string, string, string) {
-	page, priceSort, dateSort, fields := c.Param("page"), c.Param("price"), c.Param("date"), c.Param("fields")
+	page, priceSort, dateSort, fields := c.DefaultQuery("page", "0"), c.Query("price"), c.Query("date"), c.Query("fields")
 	return page, priceSort, dateSort, fields
 }
 
@@ -19,6 +19,8 @@ func GetAllAdvertisements(c *gin.Context) {
 	page, priceSort, dateSort, _ := getParams(c)
 	if priceSort == "" && dateSort == "" {
 		result = services.GetAdvWithoutSorting(page, database.DB)
+	} else {
+		result = services.GetAdvSorting(page, []string{priceSort, dateSort}, database.DB)
 	}
 	c.JSON(http.StatusOK, result)
 }
