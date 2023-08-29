@@ -74,3 +74,24 @@ func GetAdvSorting(page string, criteria []string, db *sqlx.DB) models.ResponseA
 	}
 	return result
 }
+
+func GetAdvertisement(fields string, id string, db *sqlx.DB) (interface{}, error) {
+	var advertisement models.AdvertisementByID
+	var adv_without_fields models.Advertisement
+	if fields == "yes" {
+		err := db.Get(&advertisement, "SELECT name, price, photos[1] FROM advertisements WHERE id = $1", id)
+		if err != nil {
+			log.Printf("error while querying: %s", err)
+			return nil, err
+		}
+		return advertisement, nil
+	} else {
+		err := db.Get(&adv_without_fields, "SELECT name, price, description, photos FROM advertisements WHERE id = $1", id)
+		if err != nil {
+			log.Printf("error while querying: %s", err)
+			return nil, err
+		}
+		return adv_without_fields, nil
+	}
+
+}

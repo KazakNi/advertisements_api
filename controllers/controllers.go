@@ -26,8 +26,15 @@ func GetAllAdvertisements(c *gin.Context) {
 }
 
 func GetAdvertisementByID(c *gin.Context) {
-	c.JSON(200, gin.H{"Ура мидлварь отработала": ""})
-	return
+	_, _, _, fields := getParams(c)
+	id := c.Param("id")
+	result, err := services.GetAdvertisement(fields, id, database.DB)
+	if err != nil {
+		c.JSON(404, gin.H{"message": "искомый объект не найден"})
+	} else {
+		c.JSON(http.StatusOK, result)
+	}
+
 }
 
 func PostAdvertisement(c *gin.Context) {

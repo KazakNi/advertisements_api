@@ -48,3 +48,14 @@
 2023/08/25 11:02:36 error while querying: sql: Scan error on column index 2, name "photos": pq: unable to parse array; expected '{' at offset 0
 2023/08/25 17:54:22 error while querying: sql: Scan error on column index 2, name "photos": pq: unable to parse array; expected '{' at offset 0
 2023/08/25 17:56:50 error while querying: pq: syntax error at or near "ORDER"
+2023/08/29 12:27:28 error while querying: sql: no rows in result set
+2023/08/29 12:30:32 error while querying: sql: no rows in result set
+2023/08/29 12:34:22 error while querying: sql: no rows in result set
+2023/08/29 12:35:40 error while querying: sql: no rows in result set
+2023/08/29 12:36:12 error while querying: sql: no rows in result set
+2023/08/29 12:36:44 error while querying: sql: no rows in result set
+2023/08/29 12:36:47 error while querying: sql: no rows in result set
+2023/08/29 12:36:49 error while querying: sql: no rows in result set
+2023/08/29 12:38:29 error while querying: sql: no rows in result set
+2023/08/29 12:38:31 error while querying: sql: no rows in result set
+2023/08/29 12:38:35 error while querying: sql: no rows in result set

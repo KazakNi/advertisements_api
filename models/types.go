@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/lib/pq"
 	_ "gopkg.in/go-playground/validator.v9"
 )
 
@@ -41,10 +42,11 @@ type Advertisement struct {
 	Created_at  *time.Time `json:"created_at,omitempty"  db:"created_at"`
 }
 
-type AllAdvertisements struct {
-	Name   string `json:"name"  db:"name"`
-	Price  int    `json:"price"  db:"price"`
-	Photos string `json:"photos" db:"photos"`
+type AdvertisementByID struct {
+	Name        string         `json:"name"  db:"name"`
+	Description string         `json:"description,omitempty"  db:"description"`
+	Price       int            `json:"price"  db:"price"`
+	Photos      pq.StringArray `json:"photos" db:"photos"`
 }
 
 type ResponseAllAdvertisements struct {
