@@ -40,6 +40,7 @@ func GetAdvSorting(page string, criteria []string, db *sqlx.DB) models.ResponseA
 	var result models.ResponseAllAdvertisements
 	page_response, page_param := getCurrentPage(page)
 	sortByPrice, sortByDate := criteria[0], criteria[1]
+
 	if sortByPrice == "ASC" {
 		err := db.Select(&advertisements, "SELECT name, price, photos[1] FROM advertisements ORDER BY price LIMIT 10 OFFSET $1", page_param)
 		if err != nil {
@@ -55,6 +56,7 @@ func GetAdvSorting(page string, criteria []string, db *sqlx.DB) models.ResponseA
 		result = models.ResponseAllAdvertisements{AllAdvertisements: advertisements, NextPage: page_response + 1}
 		return result
 	}
+
 	if sortByDate == "ASC" {
 		err := db.Select(&advertisements, "SELECT name, price, photos[1] FROM advertisements ORDER BY created_at LIMIT 10 OFFSET $1", page_param)
 		if err != nil {

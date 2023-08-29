@@ -29,6 +29,10 @@ func (user *User) CheckPassword(providedPassword string) error {
 }
 */
 
+type IdPath struct {
+	Id string `uri:"id" binding:"required,numeric"`
+}
+
 type Advertisement struct {
 	Name        string     `json:"name"  db:"name"`
 	Description string     `json:"description,omitempty"  db:"description"`

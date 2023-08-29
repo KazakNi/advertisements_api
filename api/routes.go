@@ -2,11 +2,14 @@ package api
 
 import (
 	"adv/controllers"
+	"adv/middleware"
 	"io"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
+
+// created id struct for path validation
 
 func logging() {
 	gin.DisableConsoleColor()
@@ -18,7 +21,7 @@ func GetRoutes() *gin.Engine {
 	logging()
 	r := gin.Default()
 	r.GET("/advertisements", controllers.GetAllAdvertisements)
-	r.GET("/advertisements/:id", controllers.GetAdvertisementByID)
+	r.GET("/advertisements/:id", middleware.ValidateIdParam, controllers.GetAdvertisementByID)
 	r.POST("/advertisements", controllers.PostAdvertisement)
 	return r
 }

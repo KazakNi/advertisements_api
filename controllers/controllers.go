@@ -26,7 +26,8 @@ func GetAllAdvertisements(c *gin.Context) {
 }
 
 func GetAdvertisementByID(c *gin.Context) {
-
+	c.JSON(200, gin.H{"Ура мидлварь отработала": ""})
+	return
 }
 
 func PostAdvertisement(c *gin.Context) {
