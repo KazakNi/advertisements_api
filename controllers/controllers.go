@@ -46,7 +46,7 @@ func PostAdvertisement(c *gin.Context) {
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера"})
 		} else {
-			c.JSON(http.StatusOK, result)
+			c.JSON(http.StatusCreated, result)
 		}
 	}
 }

@@ -62,7 +62,8 @@ type PostAdvertisement struct {
 }
 
 type ResponsePostAdv struct {
-	Id int `json:"id" binding:"required,numeric" db:"id"`
+	Id         int `json:"id" binding:"required,numeric" db:"id"`
+	Statuscode int `json:"status code"`
 }
 
 // func (a *Advertisement) ShowOptionalParams(visible bool) *Advertisement

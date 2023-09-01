@@ -105,7 +105,7 @@ func PostAdvertisement(adv models.PostAdvertisement, db *sqlx.DB) (adv_id models
 	err = row.Scan(&lastInsertId)
 	if err != nil {
 		log.Printf("error while insert values: %s", err)
-		return models.ResponsePostAdv{}, err
+		return models.ResponsePostAdv{Statuscode: 400}, err
 	}
-	return models.ResponsePostAdv{Id: lastInsertId}, nil
+	return models.ResponsePostAdv{Id: lastInsertId, Statuscode: 201}, nil
 }
