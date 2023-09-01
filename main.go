@@ -11,7 +11,7 @@ const dev = false // false while production mode
 
 func main() {
 	logger()
-
+	defer database.DB.Close()
 	if dev == true {
 		database.CreateDB(database.DB)
 		database.ExecuteQueries(database.DB)

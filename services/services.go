@@ -95,3 +95,17 @@ func GetAdvertisement(fields string, id string, db *sqlx.DB) (interface{}, error
 	}
 
 }
+
+var dummy_sql = "INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5)"
+
+func PostAdvertisement(adv models.PostAdvertisement, db *sqlx.DB) (adv_id models.ResponsePostAdv, err error) {
+	var lastInsertId int
+
+	row := db.QueryRow("INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5) RETURNING id", adv.Name, adv.Description, adv.Price, database.Creation_time, adv.Photos)
+	err = row.Scan(&lastInsertId)
+	if err != nil {
+		log.Printf("error while insert values: %s", err)
+		return models.ResponsePostAdv{}, err
+	}
+	return models.ResponsePostAdv{Id: lastInsertId}, nil
+}

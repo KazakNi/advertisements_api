@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-var creation_time = time.Now()
+var Creation_time = time.Now()
 var schema = `
 CREATE TABLE IF NOT EXISTS advertisements(
 	id SERIAL PRIMARY KEY,

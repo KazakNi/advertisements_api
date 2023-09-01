@@ -37,9 +37,9 @@ func ExecuteQueries(db *sqlx.DB) {
 	// For database filling, disabled while prod mode
 	tx := db.MustBegin()
 	log.Println("Query transaction begins")
-	tx.MustExec(insert_query, "Balls", "Adiddas premium match ball", "150", creation_time, `{"link11", "link22", "link34"}`)
-	tx.MustExec(insert_query, "Glasses", "Oakley used but good", "70", creation_time, `{"link1", "link2", "link3"}`)
-	tx.MustExec(insert_query, "Tutor", "English tutor for children, price per hour", "50", creation_time, `{"http://image.com/asfalm122.jpeg", "http://image.com/asfaf345hjtuj67.jpeg", "http://image.com/vbSDGQ93m.jpeg"}`)
+	tx.MustExec(insert_query, "Balls", "Adiddas premium match ball", "150", Creation_time, `{"link11", "link22", "link34"}`)
+	tx.MustExec(insert_query, "Glasses", "Oakley used but good", "70", Creation_time, `{"link1", "link2", "link3"}`)
+	tx.MustExec(insert_query, "Tutor", "English tutor for children, price per hour", "50", Creation_time, `{"http://image.com/asfalm122.jpeg", "http://image.com/asfaf345hjtuj67.jpeg", "http://image.com/vbSDGQ93m.jpeg"}`)
 	log.Println("Query transaction ends")
 	tx.Commit()
 }

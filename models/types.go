@@ -31,7 +31,7 @@ func (user *User) CheckPassword(providedPassword string) error {
 */
 
 type IdPath struct {
-	Id string `uri:"id" binding:"required,numeric"`
+	Id int `uri:"id" binding:"required,numeric"`
 }
 
 type Advertisement struct {
@@ -52,6 +52,17 @@ type AdvertisementByID struct {
 type ResponseAllAdvertisements struct {
 	AllAdvertisements []Advertisement `json:"items"`
 	NextPage          int             `json:"next_page"`
+}
+
+type PostAdvertisement struct {
+	Name        string         `json:"name"  binding:"required,min=3" db:"name"`
+	Description string         `json:"description"  binding:"required,min=5" db:"description"`
+	Price       int            `json:"price"  binding:"required,gte=1" db:"price"`
+	Photos      pq.StringArray `json:"photos" binding:"required,min=2" db:"photos"`
+}
+
+type ResponsePostAdv struct {
+	Id int `json:"id" binding:"required,numeric" db:"id"`
 }
 
 // func (a *Advertisement) ShowOptionalParams(visible bool) *Advertisement

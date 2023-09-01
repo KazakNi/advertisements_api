@@ -59,3 +59,35 @@
 2023/08/29 12:38:29 error while querying: sql: no rows in result set
 2023/08/29 12:38:31 error while querying: sql: no rows in result set
 2023/08/29 12:38:35 error while querying: sql: no rows in result set
+2023/09/01 17:21:23 error while insert values: pq: null value in column "created_at" of relation "advertisements" violates not-null constraint
+2023/09/01 17:29:52 error while insert values: pq: INSERT has more expressions than target columns
+2023/09/01 17:32:08 error while insert values: sql: no rows in result set
+2023/09/01 17:36:13 error while insert values: sql: no rows in result set
+2023/09/01 17:36:14 error while insert values: sql: no rows in result set
+2023/09/01 17:37:21 error while insert values: sql: no rows in result set
+2023/09/01 17:37:23 error while insert values: sql: no rows in result set
+2023/09/01 17:38:20 error while insert values: sql: no rows in result set
+2023/09/01 17:39:36 error while insert values: sql: no rows in result set
+2023/09/01 17:39:43 error while insert values: sql: no rows in result set
+2023/09/01 17:39:48 error while insert values: sql: no rows in result set
+2023/09/01 17:42:21 error while insert values: sql: converting argument $4 type: unsupported type []string, a slice of string
+2023/09/01 17:44:06 error while insert values: sql: no rows in result set
+2023/09/01 17:48:34 error while insert values: pq: malformed array literal: "2023-09-01 17:48:26.9520598+03:00"
+2023/09/01 17:49:39 error while insert values: sql: no rows in result set
+2023/09/01 17:52:08 error while insert values: sql: no rows in result set
+2023/09/01 17:53:59 error while insert values: sql: no rows in result set
+2023/09/01 17:56:11 error while insert values: sql: no rows in result set
+2023/09/01 18:00:27 error while insert values: expected struct but got int
+2023/09/01 18:02:12 error while insert values: sql: no rows in result set
+2023/09/01 18:02:46 error while insert values: sql: no rows in result set
+2023/09/01 18:02:47 error while insert values: sql: no rows in result set
+2023/09/01 18:11:58 error while insert values: sql: no rows in result set
+2023/09/01 18:11:59 error while insert values: sql: no rows in result set
+2023/09/01 18:14:55 error while insert values: sql: no rows in result set
+2023/09/01 18:19:50 error while insert values: sql: no rows in result set
+2023/09/01 18:19:51 error while insert values: sql: no rows in result set
+2023/09/01 18:20:02 error while insert values: sql: no rows in result set
+2023/09/01 18:20:04 error while insert values: sql: no rows in result set
+2023/09/01 18:21:03 error while insert values: sql: no rows in result set
+2023/09/01 18:21:04 error while insert values: sql: no rows in result set
+2023/09/01 18:22:16 error while insert values: sql: no rows in result set

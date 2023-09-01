@@ -30,7 +30,7 @@ func GetAdvertisementByID(c *gin.Context) {
 	id := c.Param("id")
 	result, err := services.GetAdvertisement(fields, id, database.DB)
 	if err != nil {
-		c.JSON(404, gin.H{"message": "искомый объект не найден"})
+		c.JSON(http.StatusNotFound, gin.H{"message": "искомый объект не найден"})
 	} else {
 		c.JSON(http.StatusOK, result)
 	}
@@ -38,5 +38,15 @@ func GetAdvertisementByID(c *gin.Context) {
 }
 
 func PostAdvertisement(c *gin.Context) {
-
+	var adv models.PostAdvertisement
+	if err := c.ShouldBindJSON(&adv); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "неверный формат данных", "error": err.Error()})
+	} else {
+		result, err := services.PostAdvertisement(adv, database.DB)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера"})
+		} else {
+			c.JSON(http.StatusOK, result)
+		}
+	}
 }
