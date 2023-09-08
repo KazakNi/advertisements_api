@@ -91,3 +91,6 @@
 2023/09/01 18:21:03 error while insert values: sql: no rows in result set
 2023/09/01 18:21:04 error while insert values: sql: no rows in result set
 2023/09/01 18:22:16 error while insert values: sql: no rows in result set
+2023/09/08 15:21:36 error while querying: sql: no rows in result set
+2023/09/08 15:21:36 sql: no rows in result set
+2023/09/08 15:27:59 error while insert values: pq: null value in column "password" of relation "users" violates not-null constraint

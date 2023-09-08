@@ -14,3 +14,7 @@ func ValidateIdParam(c *gin.Context) {
 	}
 	return
 }
+
+func AuthRequiredCheck(c *gin.Context) {
+
+}

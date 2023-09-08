@@ -3,6 +3,7 @@ package services
 import (
 	database "adv/db"
 	"adv/models"
+	"database/sql"
 	"log"
 	"strconv"
 
@@ -98,14 +99,53 @@ func GetAdvertisement(fields string, id string, db *sqlx.DB) (interface{}, error
 
 var dummy_sql = "INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5)"
 
-func PostAdvertisement(adv models.PostAdvertisement, db *sqlx.DB) (adv_id models.ResponsePostAdv, err error) {
+func PostAdvertisement(adv models.PostAdvertisement, db *sqlx.DB) (adv_id models.ResponsePost, err error) {
 	var lastInsertId int
 
 	row := db.QueryRow("INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5) RETURNING id", adv.Name, adv.Description, adv.Price, database.Creation_time, adv.Photos)
 	err = row.Scan(&lastInsertId)
 	if err != nil {
 		log.Printf("error while insert values: %s", err)
-		return models.ResponsePostAdv{Statuscode: 400}, err
+		return models.ResponsePost{Statuscode: 400}, err
 	}
-	return models.ResponsePostAdv{Id: lastInsertId, Statuscode: 201}, nil
+	return models.ResponsePost{Id: lastInsertId, Statuscode: 201}, nil
+}
+
+func IsUserExists(email string, db *sqlx.DB) (exists bool, err error) {
+	var id int = -1
+	err = db.Get(&id, "SELECT id FROM users WHERE email = $1", email)
+	if err == sql.ErrNoRows {
+		return false, nil
+	} else if err != nil {
+		log.Printf("error while querying: %s", err)
+		return false, err
+	} else {
+		return true, nil
+	}
+}
+
+func CreateUser(user models.User, db *sqlx.DB) (user_id models.ResponsePost, err error) {
+	var id int
+	user.HashPassword(user.Password)
+	row := db.QueryRow("INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id", user.Username, user.Email, user.Password)
+	err = row.Scan(&id)
+	if err != nil {
+		log.Printf("error while insert values: %s", err)
+		return models.ResponsePost{Statuscode: 400}, err
+	}
+	return models.ResponsePost{Id: id, Statuscode: 201}, nil
+
+}
+
+func GetUserByEmail(email string, db *sqlx.DB) (user models.User, err error) {
+	var current_user models.User
+	err = db.Get(&current_user, "SELECT name, email, password FROM users WHERE email = $1", email)
+	if err == sql.ErrNoRows {
+		return models.User{}, nil
+	} else if err != nil {
+		log.Printf("error while querying user: %s", err)
+		return current_user, err
+	} else {
+		return current_user, nil
+	}
 }

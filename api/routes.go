@@ -23,5 +23,11 @@ func GetRoutes() *gin.Engine {
 	r.GET("/advertisements", controllers.GetAllAdvertisements)
 	r.GET("/advertisements/:id", middleware.ValidateIdParam, controllers.GetAdvertisementByID)
 	r.POST("/advertisements", controllers.PostAdvertisement)
+	auth := r.Group("/auth")
+	{
+		auth.POST("/signup", controllers.SignUp)
+		auth.POST("/signin", controllers.SignIn)
+
+	}
 	return r
 }

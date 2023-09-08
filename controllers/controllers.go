@@ -4,6 +4,7 @@ import (
 	database "adv/db"
 	"adv/models"
 	"adv/services"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -47,6 +48,47 @@ func PostAdvertisement(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера"})
 		} else {
 			c.JSON(http.StatusCreated, result)
+		}
+	}
+}
+
+func SignIn(c *gin.Context) {
+	var user models.User
+	if err := c.BindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "неверный формат данных", "error": err.Error()})
+	} else {
+		result, err := services.GetUserByEmail(user.Email, database.DB)
+		if result.Email == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "Почта либо пароль не совпадают!"})
+		} else if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера", "error": err.Error()})
+		} else if result.CheckPassword(user.Password) != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "Почта либо пароль не совпадают!"})
+		} else {
+			c.Request.Method = "GET"
+			c.Redirect(http.StatusSeeOther, "/advertisements")
+		}
+	}
+}
+
+func SignUp(c *gin.Context) {
+	var user models.User
+	if err := c.BindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "неверный формат данных", "error": err.Error()})
+	} else {
+		userExists, err := services.IsUserExists(user.Email, database.DB)
+		if userExists {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "пользователь с такой почтой уже существует!"})
+		} else if err != nil {
+			log.Fatalln(err)
+			c.AbortWithStatus(http.StatusInternalServerError)
+		} else {
+			result, err := services.CreateUser(user, database.DB)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера"})
+			} else {
+				c.JSON(http.StatusCreated, result)
+			}
 		}
 	}
 }
