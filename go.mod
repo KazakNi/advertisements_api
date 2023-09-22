@@ -8,7 +8,10 @@ require (
 	github.com/lib/pq v1.2.0
 )
 
-require gopkg.in/go-playground/validator.v9 v9.31.0
+require (
+	github.com/golang-jwt/jwt/v4 v4.5.0
+	gopkg.in/go-playground/validator.v9 v9.31.0
+)
 
 require gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 

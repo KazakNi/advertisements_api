@@ -94,3 +94,6 @@
 2023/09/08 15:21:36 error while querying: sql: no rows in result set
 2023/09/08 15:21:36 sql: no rows in result set
 2023/09/08 15:27:59 error while insert values: pq: null value in column "password" of relation "users" violates not-null constraint
+2023/09/22 13:53:41 Token key was not discovered!
+2023/09/22 13:54:46 Token key was not discovered!
+2023/09/22 13:57:01 Token key was not discovered! key is of invalid type

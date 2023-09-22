@@ -139,7 +139,7 @@ func CreateUser(user models.User, db *sqlx.DB) (user_id models.ResponsePost, err
 
 func GetUserByEmail(email string, db *sqlx.DB) (user models.User, err error) {
 	var current_user models.User
-	err = db.Get(&current_user, "SELECT name, email, password FROM users WHERE email = $1", email)
+	err = db.Get(&current_user, "SELECT id, name, email, password FROM users WHERE email = $1", email)
 	if err == sql.ErrNoRows {
 		return models.User{}, nil
 	} else if err != nil {

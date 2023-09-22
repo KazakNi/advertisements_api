@@ -3,12 +3,14 @@ package models
 import (
 	"time"
 
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/lib/pq"
 	"golang.org/x/crypto/bcrypt"
 	_ "gopkg.in/go-playground/validator.v9"
 )
 
 type User struct {
+	Id       string `json:"id" db:"id"`
 	Username string `json:"name" db:"name"`
 	Email    string `json:"email" db:"email"`
 	Password string `json:"password,omitempty" db:"password"`
@@ -64,4 +66,8 @@ type PostAdvertisement struct {
 type ResponsePost struct {
 	Id         int `json:"id,omitempty" binding:"required,numeric" db:"id"`
 	Statuscode int `json:"status code"`
+}
+
+type CustomClaims struct {
+	jwt.RegisteredClaims
 }
