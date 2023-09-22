@@ -97,3 +97,12 @@
 2023/09/22 13:53:41 Token key was not discovered!
 2023/09/22 13:54:46 Token key was not discovered!
 2023/09/22 13:57:01 Token key was not discovered! key is of invalid type
+2023/09/22 16:29:20 token contains an invalid number of segments
+2023/09/22 16:30:35 signing method (alg) is unavailable.
+2023/09/22 16:40:29 key is of invalid type
+2023/09/22 16:43:23 signing method (alg) is unspecified.
+2023/09/22 16:48:11 illegal base64 data at input byte 36
+2023/09/22 16:48:58 illegal base64 data at input byte 36
+2023/09/22 16:52:56 illegal base64 data at input byte 36
+2023/09/22 16:53:33 illegal base64 data at input byte 36
+2023/09/22 16:54:39 illegal base64 data at input byte 36

@@ -2,16 +2,15 @@ package controllers
 
 import (
 	database "adv/db"
+	"adv/middleware"
 	"adv/models"
 	"adv/services"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/joho/godotenv"
 )
 
 func getParams(c *gin.Context) (string, string, string, string) {
@@ -70,17 +69,7 @@ func SignIn(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{"status": "Почта либо пароль не совпадают!"})
 		} else {
 			claims := models.CustomClaims{jwt.RegisteredClaims{ID: result.Id, ExpiresAt: jwt.NewNumericDate(time.Now().Add(72 * time.Hour))}}
-			token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-			err := godotenv.Load()
-			if err != nil {
-				log.Fatal("Error loading .env file")
-			}
-			token_string, err := token.SignedString([]byte(os.Getenv("TOKEN_SECRET")))
-			if err != nil {
-				log.Fatalln("Token key was not discovered!", err)
-				c.AbortWithError(500, err)
-			}
-			c.Header("Authorization", "Bearer "+token_string)
+			middleware.SetToken(c, claims)
 		}
 	}
 }
