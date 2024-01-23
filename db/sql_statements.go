@@ -24,4 +24,4 @@ CREATE TABLE IF NOT EXISTS users (
 	password TEXT NOT NULL
 );`
 
-var insert_query = "INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5, $6)"
+var insert_query = "INSERT INTO advertisements (name, description, price, created_at, photos) VALUES ($1, $2, $3, $4, $5)"

@@ -7,6 +7,7 @@ import (
 	"adv/services"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -21,10 +22,21 @@ func getParams(c *gin.Context) (string, string, string, string) {
 func GetAllAdvertisements(c *gin.Context) {
 	result := models.ResponseAllAdvertisements{}
 	page, priceSort, dateSort, _ := getParams(c)
+	db_rows := database.CountRows(database.DB)
+	page_num, err := strconv.Atoi(page)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "ошибка сервера"})
+	}
+
+	if page_num > db_rows/10 && page_num != 1 {
+		c.JSON(http.StatusNotFound, "Cтраница не найдена")
+		return
+	}
+
 	if priceSort == "" && dateSort == "" {
-		result = services.GetAdvWithoutSorting(page, database.DB)
+		result = services.GetAdvWithoutSorting(page, database.DB, db_rows)
 	} else {
-		result = services.GetAdvSorting(page, []string{priceSort, dateSort}, database.DB)
+		result = services.GetAdvSorting(page, []string{priceSort, dateSort}, database.DB, db_rows)
 	}
 	c.JSON(http.StatusOK, result)
 }

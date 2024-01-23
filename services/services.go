@@ -8,27 +8,28 @@ import (
 	"strconv"
 
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 var advertisements = []models.Advertisement{}
 
-func getCurrentPage(page string) (int, int) {
+func getCurrentPage(page string, db_rows int) (int, int) {
 	page_response, err := strconv.Atoi(page)
 	page_param := page_response
 
 	if err != nil {
 		log.Fatalf("invalid http parameter: 'page'=%v\n, error:%s", page_param, err)
 	}
-	if page_param < 2 || database.CountRows(database.DB) <= 10 {
+	if page_param < 2 || db_rows <= 10 {
 		page_param = 0
 	} else {
 		page_param = (page_param - 1) * 10
 	}
-	return page_response, page_param
+	return db_rows / 10, page_param
 }
 
-func GetAdvWithoutSorting(page string, db *sqlx.DB) models.ResponseAllAdvertisements {
-	page_response, page_param := getCurrentPage(page)
+func GetAdvWithoutSorting(page string, db *sqlx.DB, db_rows int) models.ResponseAllAdvertisements {
+	page_response, page_param := getCurrentPage(page, db_rows)
 	err := db.Select(&advertisements, "SELECT name, price, photos[1] FROM advertisements LIMIT 10 OFFSET $1", page_param)
 	if err != nil {
 		log.Fatalf("error while querying: %s", err)
@@ -37,9 +38,9 @@ func GetAdvWithoutSorting(page string, db *sqlx.DB) models.ResponseAllAdvertisem
 	return result
 }
 
-func GetAdvSorting(page string, criteria []string, db *sqlx.DB) models.ResponseAllAdvertisements {
+func GetAdvSorting(page string, criteria []string, db *sqlx.DB, db_rows int) models.ResponseAllAdvertisements {
 	var result models.ResponseAllAdvertisements
-	page_response, page_param := getCurrentPage(page)
+	page_response, page_param := getCurrentPage(page, db_rows)
 	sortByPrice, sortByDate := criteria[0], criteria[1]
 
 	if sortByPrice == "ASC" {

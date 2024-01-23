@@ -1,6 +1,6 @@
 module adv
 
-go 1.21.0
+go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.9.1
@@ -10,10 +10,15 @@ require (
 
 require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/stretchr/testify v1.8.4
 	gopkg.in/go-playground/validator.v9 v9.31.0
 )
 
-require gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
+require (
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
+)
 
 require (
 	github.com/bytedance/sonic v1.10.0 // indirect

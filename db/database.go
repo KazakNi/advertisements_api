@@ -14,9 +14,10 @@ import (
 var DB = InitDB()
 
 func InitDB() *sqlx.DB {
-	err := godotenv.Load()
+	path, _ := os.Getwd()
+	err := godotenv.Load(".env")
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file", err, "database")
 	}
 
 	DriverName := os.Getenv("DBNAME")
@@ -24,7 +25,7 @@ func InitDB() *sqlx.DB {
 
 	db, err := sqlx.Connect(DriverName, DataSourceName)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err, path)
 	}
 	return db
 }
