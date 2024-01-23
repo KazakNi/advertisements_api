@@ -21,7 +21,11 @@ docker-compose up
 Проек запущен, Вам будут доступны по локальному адресу http://127.0.0.1:8080 следующие эндпоинты:
 
 GET /advertisements
+
 GET /advertisements/{id}
+
 POST /advertisements
+
 POST auth//signup
+
 POST auth//signin
