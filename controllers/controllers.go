@@ -82,6 +82,7 @@ func SignIn(c *gin.Context) {
 		} else {
 			claims := models.CustomClaims{jwt.RegisteredClaims{ID: result.Id, ExpiresAt: jwt.NewNumericDate(time.Now().Add(72 * time.Hour))}}
 			middleware.SetToken(c, claims)
+			c.Redirect(http.StatusFound, "/advertisements")
 		}
 	}
 }
